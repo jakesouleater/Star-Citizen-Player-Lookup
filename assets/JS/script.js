@@ -130,6 +130,7 @@ const addNameInput = document.getElementById("add-name");
 const orgNameInput = document.getElementById("org-name");
 const playerStatusInput = document.getElementById("player-status");
 const rsiAccountInput = document.getElementById("rsi-account");
+const playerInfo = document.getElementById("player-info");
 
 // Listen for the Add Player button.
 submitPlayerButton.addEventListener("click", function () {
@@ -156,4 +157,5 @@ submitPlayerButton.addEventListener("click", function () {
   // JSON.stringify() converts the JavaScript array into
   // JSON text so the browser can store it.
   localStorage.setItem("players", JSON.stringify(players));
+  playerInfo.textContent = "Player " + playerName + " added successfully!";
 });

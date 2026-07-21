@@ -132,7 +132,15 @@ ul {
   border: 1px solid rgba(248, 230, 182, 0.2);
   border-radius: 12px;
 }
-
+#player-info{
+   margin: 2rem auto;
+  width: 700px;
+  font-family: "Roboto", sans-serif;
+  color: red;
+  font-size: 25px;
+   background-color: rgba(0, 0, 0, 0.55);
+   border-radius: 12px;
+}
 
 
 /* ======================================================
