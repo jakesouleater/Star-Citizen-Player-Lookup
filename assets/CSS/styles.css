@@ -32,8 +32,9 @@
 body {
   background-image: url("../images/body-image.png");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-
+  min-height: 100vh;
   /* Dark overlay to improve readability */
   background-color: rgba(10, 10, 10, 0.6);
   background-blend-mode: multiply;
