@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <!-- ======================================================
+       META DATA
+       ====================================================== -->
+
+  <!-- Character encoding -->
+  <meta charset="UTF-8" />
+
+  <!-- Makes the website responsive on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Browser tab title -->
+  <title>Name Finder</title>
+
+
+  <!-- ======================================================
+       STYLESHEETS
+       ====================================================== -->
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="assets/CSS/styles.css" />
+
+
+  <!-- ======================================================
+       GOOGLE FONTS
+       ====================================================== -->
+
+  <!-- Establish early connections for faster font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Import Oxanium and Roboto fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <header class="hero font-styles">
+
+    <!-- Logo and website title -->
+    <div class="hero-logo">
+
+      <img
+        id="logo-img"
+        src="assets/images/star-citizen-icon-35492.png"
+        alt="Star Citizen Logo"
+      >
+
+      <h1>Star Citizen Player Lookup</h1>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ======================================================
+       MAIN CONTENT
+       ====================================================== -->
+
+  <main>
+
+    <!-- Application title -->
+    <h1 class="font-styles">Verse Intel Database</h1>
+
+
+
+    <!-- ======================================================
+         NAVIGATION TABS
+         ====================================================== -->
+
+    <!-- Used by JavaScript to switch between Lookup and Add Record -->
+    <div class="tabs">
+
+      <button id="lookup-tab">
+        Look-up
+      </button>
+
+      <button id="add-tab">
+        Add Record
+      </button>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         PLAYER LOOKUP
+         ====================================================== -->
+
+    <section class="lookup font-styles">
+
+      <h2>Player Lookup</h2>
+
+      <!-- Search form -->
+      <form id="search-form">
+
+        <div class="form-row">
+          <label for="player-name">Player Name:</label>
+
+          <input
+            id="player-name"
+            type="text"
+          >
+        </div>
+
+        <button
+          type="submit"
+          id="search-button"
+        >
+          Search
+        </button>
+
+      </form>
+
+      <!-- Reserved for future content if needed -->
+      <div class="results"></div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         SEARCH RESULTS
+         ====================================================== -->
+
+    <!--
+      JavaScript dynamically inserts player information
+      into this section after a search.
+    -->
+    <section
+      class="font-styles"
+      id="search-results"
+    >
+
+    </section>
+
+
+
+    <!-- ======================================================
+         ADD PLAYER FORM
+         ====================================================== -->
+
+    <section class="add-record font-styles">
+
+      <h2>Add Record</h2>
+
+      <form>
+
+        <!-- Player Name -->
+        <div class="form-row">
+
+          <label for="add-name">
+            Add Player Name:
+          </label>
+
+          <input
+            id="add-name"
+            type="text"
+          >
+
+        </div>
+
+
+        <!-- Organization -->
+        <div class="form-row">
+
+          <label for="org-name">
+            Organization:
+          </label>
+
+          <input
+            id="org-name"
+            type="text"
+          >
+
+        </div>
+
+
+        <!-- Friendly / Hostile Status -->
+        <div class="form-row">
+
+          <label for="player-status">
+            Status:
+          </label>
+
+          <select
+            name="Status"
+            id="player-status"
+          >
+
+            <option value="">
+              --Please choose an option--
+            </option>
+
+            <option value="friendly">
+              Friendly
+            </option>
+
+            <option value="hostile">
+              Hostile
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- RSI Profile URL -->
+        <div class="form-row">
+
+          <label for="rsi-account">
+            RSI Account Link:
+          </label>
+
+          <input
+            id="rsi-account"
+            type="url"
+          >
+
+        </div>
+
+
+        <!-- JavaScript handles adding the player -->
+        <button
+          type="button"
+          id="submit-player"
+        >
+          Submit
+        </button>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ======================================================
+       JAVASCRIPT
+       ====================================================== -->
+
+  <!-- Main application logic -->
+  <script src="assets/JS/script.js"></script>
+
+</body>
+
+</html>

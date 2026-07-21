@@ -1,0 +1,235 @@
+/* ======================================================
+   Verse Intel Database
+   Author: Jacob Rousseau
+
+   Description:
+   Main stylesheet for the Verse Intel Database project.
+   Controls the layout, typography, forms, buttons,
+   and overall appearance of the application.
+   ====================================================== */
+
+
+
+/* ======================================================
+   CSS RESET
+   ====================================================== */
+
+/* Remove default browser spacing and use
+   border-box sizing for predictable layouts. */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* ======================================================
+   GLOBAL STYLES
+   ====================================================== */
+
+body {
+  background-image: url("/assets/images/body-image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* Dark overlay to improve readability */
+  background-color: rgba(10, 10, 10, 0.6);
+  background-blend-mode: multiply;
+}
+
+main {
+  text-align: center;
+  margin-top: 200px;
+}
+
+
+
+/* ======================================================
+   TYPOGRAPHY
+   ====================================================== */
+
+h1,
+h2 {
+  font-family: "Oxanium", sans-serif;
+}
+
+label {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Shared font color used throughout the page. */
+.font-styles {
+  color: rgb(139, 174, 197);
+}
+
+span {
+  color: red;
+}
+
+
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+header {
+  display: flex;
+  background-color: rgb(2, 27, 57);
+  box-shadow: 0 10px 30px black;
+}
+
+.hero-logo {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.hero-logo h1 {
+  margin: auto;
+}
+
+#logo-img {
+  width: 85px;
+  margin-right: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px black;
+}
+
+
+
+/* ======================================================
+   NAVIGATION
+   ====================================================== */
+
+ul {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+}
+
+.tabs {
+  margin: 50px 0;
+}
+
+
+
+/* ======================================================
+   PLAYER LOOKUP & ADD RECORD PANELS
+   ====================================================== */
+
+/* Shared styling for both application panels. */
+.lookup,
+.add-record {
+  width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  background-color: rgba(0, 0, 0, 0.55);
+
+  border: 1px solid rgba(248, 230, 182, 0.2);
+  border-radius: 12px;
+}
+
+
+
+/* ======================================================
+   SEARCH RESULTS
+   ====================================================== */
+
+/* Hidden until JavaScript displays search results. */
+#search-results {
+
+  width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+
+  background-color: rgba(0, 0, 0, 0.55);
+
+  border: 1px solid rgba(248, 230, 182, 0.2);
+  border-radius: 12px;
+
+  display: none;
+}
+
+#search-results p {
+  color: rgb(139, 174, 197);
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+}
+
+
+
+/* ======================================================
+   FORMS
+   ====================================================== */
+
+form {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  width: 150px;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+.form-row input,
+.form-row textarea {
+  flex: 0.6;
+}
+
+
+
+/* ======================================================
+   BUTTONS
+   ====================================================== */
+
+button {
+  padding: 3px 5px;
+
+  color: black;
+  background-color: rgb(84, 173, 247);
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+
+  border-radius: 5px;
+}
+
+button:hover {
+  color: black;
+  background-color: rgb(242, 181, 28);
+}
+
+
+
+/* ======================================================
+   LINKS
+   ====================================================== */
+
+/* Used for the RSI profile link displayed in search results. */
+a {
+  padding: 3px 7px;
+
+  color: black;
+  text-decoration: none;
+
+  background-color: rgb(84, 173, 247);
+
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+a:hover {
+  background-color: rgb(242, 181, 28);
+}
