@@ -30,7 +30,7 @@
    ====================================================== */
 
 body {
-  background-image: url("/assets/images/body-image.png");
+  background-image: url("../images/body-image.png");
   background-size: cover;
   background-repeat: no-repeat;
 
