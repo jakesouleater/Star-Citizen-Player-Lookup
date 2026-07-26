@@ -1,161 +1,79 @@
 // ======================================================
-// Verse Intel Database
+// Verse Intel
 // Author: Jacob Rousseau
 //
 // Description:
-// A Star Citizen player database that allows users to
-// search for player records and add new ones.
-//
-// Player data is stored in the browser's localStorage,
-// allowing records to persist after refreshing the page.
+// A Star Citizen player database that searches the
+// Star Citizen API and will eventually cache player
+// information locally for faster lookups.
 // ======================================================
 
-
-
-// ======================================================
-// TAB NAVIGATION
-// ======================================================
-
-// Button References
-const lookupButton = document.getElementById("lookup-tab");
-const addButton = document.getElementById("add-tab");
-
-// Section References
-const lookupSection = document.querySelector(".lookup");
-const addSection = document.querySelector(".add-record");
-
-// Switch to the Add Record tab.
-addButton.addEventListener("click", function () {
-  lookupSection.style.display = "none";
-});
-
-addButton.addEventListener("click", function () {
-  addSection.style.display = "block";
-});
-
-// Switch back to the Player Lookup tab.
-lookupButton.addEventListener("click", function () {
-  addSection.style.display = "none";
-});
-
-lookupButton.addEventListener("click", function () {
-  lookupSection.style.display = "block";
-});
-
-// Hide the Add Record section when the page first loads.
-addSection.style.display = "none";
-
-
+const API_KEY = "PNsq3lZQkAJMPHIPXjsWL2fXT9iGgW15";
 
 // ======================================================
-// PLAYER DATABASE
+// PLAYER SEARCH
 // ======================================================
-
-// Load previously saved player records from localStorage.
-//
-// localStorage stores everything as JSON text.
-// JSON.parse() converts that text back into a JavaScript array.
-//
-// If no saved player records exist yet, use an empty array.
-const players = JSON.parse(localStorage.getItem("players")) || [];
-
-
-
-// ======================================================
-// PLAYER LOOKUP
-// ======================================================
-
-// DOM References
+const orgInfo = document.getElementById("org-info");
+const noOrg = document.getElementById("no-org");
 const searchButton = document.getElementById("search-button");
-const playerNameInput = document.getElementById("player-name");
 const searchResults = document.getElementById("search-results");
-const searchForm = document.getElementById("search-form");
+const displayHandle = document.getElementById("display-handle");
+const displayEnlisted = document.getElementById("display-enlisted");
+const displayOrg = document.getElementById("display-org");
+const displayRank = document.getElementById("display-rank");
+const displayMembers = document.getElementById("display-members");
+const profilePicture = document.getElementById("display-profile-picture");
+const orgImage = document.getElementById("org-img");
+// const loadingScreen = document.getElementById("loading-screen");
 
-// Listen for the search form being submitted.
-searchForm.addEventListener("submit", function (event) {
+searchButton.addEventListener("click", async function () {
+  orgImage.src = "";
+  displayOrg.textContent = "";
+  displayRank.textContent = "";
+  displayMembers.textContent = "";
 
-  // Prevent the page from refreshing when the form is submitted.
-  event.preventDefault();
+  // Read the player name entered by the user.
+  const playerName = document.getElementById("player-name").value;
 
-  // Store the player's name entered by the user.
-  const inputName = playerNameInput.value;
+  // Request player information from the API.
+  const url = `https://api.starcitizen-api.com/${API_KEY}/v1/live/user/${playerName}`;
+  const response = await fetch(url);
+  const playerData = await response.json();
 
-  // Used to determine whether a matching player was found.
-  let playerFound = false;
+  // --------------------------------------------------
+  // Display Player Information
+  // --------------------------------------------------
 
-  // Loop through every player in the database.
-  for (let i = 0; i < players.length; i++) {
+  profilePicture.src = playerData.data.profile.image;
+  displayHandle.textContent = playerData.data.profile.handle;
+  displayEnlisted.textContent = playerData.data.profile.enlisted.slice(0, 10);
+  console.log(playerData.data);
+  searchResults.style.display = "flex";
+  // --------------------------------------------------
+  // Organization Information
+  // --------------------------------------------------
 
-    // Compare the user's input to the current player's name.
-    if (inputName === players[i].name) {
+  const orgSID = playerData.data.organization.sid;
 
-      playerFound = true;
+  if (playerData.data.organization.name === undefined) {
+    orgInfo.style.display = "none";
+    noOrg.style.display = "block";
+    noOrg.textContent = "No Organization";
+    // TODO:
+    // Hide organization information.
+    // Show "No Organization".
+  } else {
+    noOrg.style.display = "none";
+    orgInfo.style.display = "block";
 
-      // Display the player's information.
-      searchResults.innerHTML =
-        `<p><span>Name:</span> ${players[i].name}</p>
-         <br>
-         <p><span>ORG:</span> ${players[i].org}</p>
-         <br>
-         <p><span>Status:</span> ${players[i].status}</p>
-         <br>
-         <p><span>RSI Link:</span>
-         <a target="_blank" href="${players[i].rsi}">
-         RSI Account Link
-         </a></p>`;
+    const orgURL = `https://api.starcitizen-api.com/${API_KEY}/v1/live/organization/${orgSID}`;
 
-      searchResults.style.display = "block";
-    }
+    const organizationResponse = await fetch(orgURL);
+    const organizationData = await organizationResponse.json();
+
+    orgImage.src = playerData.data.organization.image;
+    displayOrg.textContent = playerData.data.organization.name;
+    displayRank.textContent = playerData.data.organization.rank;
+    displayMembers.textContent = organizationData.data.members;
   }
-
-  // If no player matched the search, display a message.
-  if (playerFound === false) {
-
-    searchResults.innerHTML =
-      `<p><span>Player Not Found</span></p>`;
-
-    searchResults.style.display = "block";
-  }
-});
-
-
-
-// ======================================================
-// ADD PLAYER
-// ======================================================
-
-// DOM References
-const submitPlayerButton = document.getElementById("submit-player");
-const addNameInput = document.getElementById("add-name");
-const orgNameInput = document.getElementById("org-name");
-const playerStatusInput = document.getElementById("player-status");
-const rsiAccountInput = document.getElementById("rsi-account");
-const playerInfo = document.getElementById("player-info");
-
-// Listen for the Add Player button.
-submitPlayerButton.addEventListener("click", function () {
-
-  // Read the values entered into the form.
-  const playerName = addNameInput.value;
-  const orgName = orgNameInput.value;
-  const playerStat = playerStatusInput.value;
-  const rsiAccount = rsiAccountInput.value;
-
-  // Create a new player object using the form values.
-  const newPlayer = {
-    name: playerName,
-    org: orgName,
-    status: playerStat,
-    rsi: rsiAccount,
-  };
-
-  // Add the new player object to the players array.
-  players.push(newPlayer);
-
-  // Save the updated array back into localStorage.
-  //
-  // JSON.stringify() converts the JavaScript array into
-  // JSON text so the browser can store it.
-  localStorage.setItem("players", JSON.stringify(players));
-  playerInfo.textContent = "Player " + playerName + " added successfully!";
 });

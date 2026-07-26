@@ -53,108 +53,86 @@
         <h1>Star Citizen Player Lookup</h1>
       </div>
     </header>
+    <div id="video-background-container">
+      <video autoplay muted loop playsinline class="video-background">
+        <source src="assets/video/banner.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-    <!-- ======================================================
+      <!-- ======================================================
        MAIN CONTENT
        ====================================================== -->
 
-    <main>
-      <!-- Application title -->
-      <h1 class="font-styles">Verse Intel Database</h1>
+      <main>
+        <!-- Application title -->
+        <h1 id="verse-intel">Verse Intel Database</h1>
 
-      <!-- ======================================================
-         NAVIGATION TABS
-         ====================================================== -->
-
-      <!-- Used by JavaScript to switch between Lookup and Add Record -->
-      <div class="tabs">
-        <button id="lookup-tab">Look-up</button>
-
-        <button id="add-tab">Add Record</button>
-      </div>
-
-      <!-- ======================================================
+        <!-- ======================================================
          PLAYER LOOKUP
          ====================================================== -->
 
-      <section class="lookup font-styles">
-        <h2>Player Lookup</h2>
+        <section class="lookup font-styles">
+          <h2>UEE Database</h2>
 
-        <!-- Search form -->
-        <form id="search-form">
-          <div class="form-row">
-            <label for="player-name">Player Name:</label>
+          <!-- Search form -->
+          <form id="search-form">
+            <div class="form-row">
+              <label for="player-name">Player Name:</label>
 
-            <input id="player-name" type="text" />
-          </div>
+              <input id="player-name" type="text" />
+            </div>
+            <div class="button-row">
+              <button type="button" id="search-button" class="btn">
+                Search UEE
+              </button>
+            </div>
+          </form>
+        </section>
 
-          <button type="submit" id="search-button">Search</button>
-        </form>
-
-        <!-- Reserved for future content if needed -->
-        <div class="results"></div>
-      </section>
-
-      <!-- ======================================================
+        <!-- ======================================================
          SEARCH RESULTS
          ====================================================== -->
 
-      <!--
+        <!--
       JavaScript dynamically inserts player information
       into this section after a search.
     -->
-      <section class="font-styles" id="search-results"></section>
-
-      <div id="player-info"></div>
-
-      <!-- ======================================================
-         ADD PLAYER FORM
-         ====================================================== -->
-
-      <section class="add-record font-styles">
-        <h2>Add Record</h2>
-
-        <form>
-          <!-- Player Name -->
-          <div class="form-row">
-            <label for="add-name"> Add Player Name: </label>
-
-            <input id="add-name" type="text" />
+        <section id="search-results">
+          <img class="results-img" id="display-profile-picture" src="" />
+          <div class="results">
+            <h2 class="results-styles">Citizen Name:</h2>
+            <p class="results-font" id="display-handle"></p>
+            <h2 class="results-styles">Enlisted Date:</h2>
+            <p id="display-enlisted"></p>
           </div>
-
-          <!-- Organization -->
-          <div class="form-row">
-            <label for="org-name"> Organization: </label>
-
-            <input id="org-name" type="text" />
+          <img class="results-img" id="org-img" src="" />
+          <div class="results" id="org-info">
+            <h2 class="results-styles">ORG Name:</h2>
+            <p id="display-org"></p>
+            <h2 class="results-styles">ORG Members:</h2>
+            <p id="display-members"></p>
+            <h2 class="results-styles">Rank in ORG:</h2>
+            <p id="display-rank"></p>
           </div>
+          <h2 id="no-org"></h2>
+        </section>
 
-          <!-- Friendly / Hostile Status -->
-          <div class="form-row">
-            <label for="player-status"> Status: </label>
+        <!-- ======================================================
+       UEE Loading coming soon
+       ====================================================== -->
+        <!-- <div id="loading-screen">
 
-            <select name="Status" id="player-status">
-              <option value="">--Please choose an option--</option>
+        <h2>USS PERSONNEL DATABASE</h2>
 
-              <option value="friendly">Friendly</option>
+        <p id="loading-text">
+          Searching Citizen Records...
+        </p>
 
-              <option value="hostile">Hostile</option>
-            </select>
-          </div>
+      </div>
 
-          <!-- RSI Profile URL -->
-          <div class="form-row">
-            <label for="rsi-account"> RSI Account Link: </label>
-
-            <input id="rsi-account" type="url" />
-          </div>
-
-          <!-- JavaScript handles adding the player -->
-          <button type="button" id="submit-player">Submit</button>
-        </form>
-      </section>
-    </main>
-
+ -->
+      </main>
+    </div>
     <!-- ======================================================
        JAVASCRIPT
        ====================================================== -->
