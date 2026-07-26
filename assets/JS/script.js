@@ -24,9 +24,11 @@ const displayRank = document.getElementById("display-rank");
 const displayMembers = document.getElementById("display-members");
 const profilePicture = document.getElementById("display-profile-picture");
 const orgImage = document.getElementById("org-img");
+const searchForm = document.getElementById("search-form");
 // const loadingScreen = document.getElementById("loading-screen");
 
-searchButton.addEventListener("click", async function () {
+searchForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
   orgImage.src = "";
   displayOrg.textContent = "";
   displayRank.textContent = "";
