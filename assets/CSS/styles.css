@@ -6,6 +6,28 @@
    Main stylesheet for the Verse Intel Database project.
    Controls the layout, typography, forms, buttons,
    and overall appearance of the application.
+
+Backgrounds 
+#050B16   Almost black navy 
+#0A1424   Main panel 
+#132238   Header/Footer 
+
+ Borders 
+#2D4A68
+#4A78A6
+
+Text
+#E6F2FF
+#AFC9E8
+
+ Status Colors 
+Connected:   #57E389
+Connecting:  #FFB347
+Offline:     #7F8FA6
+Error:        #FF5C5C
+
+
+
    ====================================================== */
 
 /* ======================================================
@@ -71,6 +93,7 @@ label {
 .results-styles {
   font-size: 20px;
   color: rgb(236, 139, 60);
+  width: 200px;
 }
 
 .results-font {
@@ -134,7 +157,6 @@ header {
 .results-img {
   display: inline-flex;
   justify-content: center;
-  padding: 10px;
 }
 
 /* ======================================================
@@ -146,7 +168,7 @@ header {
   display: none;
   width: 1000px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 1rem;
 
   background-color: rgba(0, 0, 0, 0.55);
 
@@ -156,7 +178,7 @@ header {
 #search-results p {
   color: white;
   font-family: "Roboto", sans-serif;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 #no-org {
@@ -167,6 +189,17 @@ header {
   margin: 2rem auto;
   padding: 2rem;
 }
+
+
+#no-player{
+  display: none;
+  font-size: 25px;
+  color: red;
+  width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
 
 /* ======================================================
    FORMS
@@ -279,4 +312,52 @@ a:hover {
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+
+
+
+#loading-screen {
+    display: none;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.terminal {
+    padding: 25px;
+    border: 2px solid #444;
+    background-color: #111;
+    border-radius: 6px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6)
+                0 0 10px rgba(88, 166, 255, 0.15);
+}
+
+.progress-container {
+  margin: 0 auto;
+  height: 12px;
+  width: 80%;
+  background-color: #0A1424;
+  border: 2px solid #2D4A68;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.terminal-header{
+  color: #E6F2FF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 2px solid #4A78A6;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+.terminal-body {
+  color: #E6F2FF;
 }

@@ -99,7 +99,7 @@
     -->
         <section id="search-results">
           <img class="results-img" id="display-profile-picture" src="" />
-          <div class="results">
+          <div class="results" id="no-citizen">
             <h2 class="results-styles">Citizen Name:</h2>
             <p class="results-font" id="display-handle"></p>
             <h2 class="results-styles">Enlisted Date:</h2>
@@ -114,23 +114,45 @@
             <h2 class="results-styles">Rank in ORG:</h2>
             <p id="display-rank"></p>
           </div>
+          <h2 id="no-player"></h2>
           <h2 id="no-org"></h2>
         </section>
 
         <!-- ======================================================
        UEE Loading coming soon
        ====================================================== -->
-        <!-- <div id="loading-screen">
+        <div id="loading-screen">
+          <div class="terminal">
+            <div class="terminal-header">
+              <span>RSI SYSTEMS</span><span>ACCESS LEVEL: UEE</span>
+            </div>
 
-        <h2>USS PERSONNEL DATABASE</h2>
+            <div class="terminal-body">
+              <h2>UEE NAVAL DATABASE TERMINAL</h2>
+              <p id="loading-message"></p>
+              <div class="progress-container">
+                <div id="progress-bar"></div>
+              </div>
+            </div>
+            <div class="terminal-footer">
+              <h2>SYSTEM STATUS</h2>
+              <div class="status-line">
+                <span>COMM-LINK</span>
+                <span class="status offline" id="comm-status">CONNECTING</span>
+              </div>
 
-        <p id="loading-text">
-          Searching Citizen Records...
-        </p>
+              <div class="status-line">
+                <span>DATABASE</span>
+                <span id="database-status">STANDBY</span>
+              </div>
 
-      </div>
-
- -->
+              <div class="status-line">
+                <span>AUTHORIZATION</span>
+                <span id="auth-status">VERIFYING</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
     <!-- ======================================================
