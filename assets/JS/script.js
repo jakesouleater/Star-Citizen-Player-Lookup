@@ -13,7 +13,9 @@ const API_KEY = "PNsq3lZQkAJMPHIPXjsWL2fXT9iGgW15";
 // ======================================================
 // PLAYER SEARCH
 // ======================================================
+const noPlayer = document.getElementById("no-player");
 const orgInfo = document.getElementById("org-info");
+const noCitizen = document.getElementById("no-citizen")
 const noOrg = document.getElementById("no-org");
 const searchButton = document.getElementById("search-button");
 const searchResults = document.getElementById("search-results");
@@ -25,57 +27,141 @@ const displayMembers = document.getElementById("display-members");
 const profilePicture = document.getElementById("display-profile-picture");
 const orgImage = document.getElementById("org-img");
 const searchForm = document.getElementById("search-form");
-// const loadingScreen = document.getElementById("loading-screen");
+const loadingScreen = document.getElementById("loading-screen");
+const loadingMessage = document.getElementById("loading-message");
+const progressBar = document.getElementById("progress-bar");
+const commStat = document.getElementById("comm-status");
+const authStat = document.getElementById("auth-status");
+const dataBase = document.getElementById("database-status");
 
-searchForm.addEventListener("submit", async function (event) {
+
+
+
+    function wait(milliseconds) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
+      });
+    }
+
+    async function typeMessage(element, message, speed){
+
+      element.textContent = "";
+
+      for (let i = 1; i < message.length; i++){
+        element.textContent = message.slice(0, i);
+        await wait(speed);
+
+      }
+
+    };
+
+
+
+  searchForm.addEventListener("submit", async function (event) {
   event.preventDefault();
-  orgImage.src = "";
-  displayOrg.textContent = "";
-  displayRank.textContent = "";
-  displayMembers.textContent = "";
+    
+    loadingScreen.style.opacity = "1";
 
-  // Read the player name entered by the user.
-  const playerName = document.getElementById("player-name").value;
 
-  // Request player information from the API.
-  const url = `https://api.starcitizen-api.com/${API_KEY}/v1/live/user/${playerName}`;
-  const response = await fetch(url);
-  const playerData = await response.json();
+    await typeMessage(loadingMessage, "Initializing COMM-LINK.....", 90);
+    commStat.style.color = "#FFB347";
+    await typeMessage(commStat, "CONNECTING....", 90);
 
-  // --------------------------------------------------
-  // Display Player Information
-  // --------------------------------------------------
+    
+    // commStat.innerHTML = "CONNECTING";
 
-  profilePicture.src = playerData.data.profile.image;
-  displayHandle.textContent = playerData.data.profile.handle;
-  displayEnlisted.textContent = playerData.data.profile.enlisted.slice(0, 10);
-  console.log(playerData.data);
-  searchResults.style.display = "flex";
-  // --------------------------------------------------
-  // Organization Information
-  // --------------------------------------------------
 
-  const orgSID = playerData.data.organization.sid;
+  try {
 
-  if (playerData.data.organization.name === undefined) {
-    orgInfo.style.display = "none";
-    noOrg.style.display = "block";
-    noOrg.textContent = "No Organization";
-    // TODO:
-    // Hide organization information.
-    // Show "No Organization".
-  } else {
-    noOrg.style.display = "none";
+    orgImage.src = "";
+    displayOrg.textContent = "";
+    displayRank.textContent = "";
+    displayMembers.textContent = "";
+
+    // Read the player name entered by the user.
+    const playerName = document.getElementById("player-name").value;
+    const url = `https://api.starcitizen-api.com/${API_KEY}/v1/live/user/${playerName}`;
+
+    const response = await fetch(url);
+    const playerData = await response.json();
+
+
+    commStat.style.color = "#57E389";
+    await typeMessage(commStat, "CONNECTED....", 90);
+    loadingMessage.style.animation = " flash 0s infinite"
+    progressBar.style.width = "25%";
+
+
+    // --------------------------------------------------
+    // Display Player Information
+    // --------------------------------------------------
+
+    if (Object.keys(playerData.data).length === 0) {
+      orgInfo.style.display = "none";
+      noCitizen.style.display = "none";
+      noPlayer.style.display = "block";
+      noPlayer.textContent = "No Citizen Found";
+      searchResults.style.display = "flex";
+      return;
+    }
+
+    noPlayer.style.display = "none";
     orgInfo.style.display = "block";
 
+    displayHandle.textContent = playerData.data.profile.handle;
+    profilePicture.src = playerData.data.profile.image;
+    displayEnlisted.textContent = playerData.data.profile.enlisted.slice(0, 10);
+    // searchResults.style.display = "flex";
+      authStat.style.color = "#FFB347";
+      await typeMessage(authStat, "AUTHORIZING....", 60);
+      progressBar.style.width = "50%";
+    // --------------------------------------------------
+    // Organization Information
+    // --------------------------------------------------
+
+    if (playerData.data.organization.sid === undefined) {
+      orgInfo.style.display = "none";
+      noOrg.style.display = "block";
+      noOrg.textContent = "No Organization";
+      return;
+    }
+
+    noPlayer.style.display = "none";
+    noOrg.style.display = "none";
+    orgInfo.style.display = "block";
+    noCitizen.style.display = "block";
+
+      authStat.style.color = "#57E389";
+      await typeMessage(authStat, "AUTHORIZED....", 90);
+      progressBar.style.width = "75%";
+
+
+    const orgSID = playerData.data.organization.sid;
     const orgURL = `https://api.starcitizen-api.com/${API_KEY}/v1/live/organization/${orgSID}`;
+
+    dataBase.style.color = "#FFB347";
+    await typeMessage(dataBase, "SEARCHING CITIZEN....", 100);
+    progressBar.style.width = "85%";
 
     const organizationResponse = await fetch(orgURL);
     const organizationData = await organizationResponse.json();
+
+    dataBase.style.color = "#57E389";
+    await typeMessage(dataBase, "CITIZEN FOUND....", 100);
+    progressBar.style.width = "100%";
+
 
     orgImage.src = playerData.data.organization.image;
     displayOrg.textContent = playerData.data.organization.name;
     displayRank.textContent = playerData.data.organization.rank;
     displayMembers.textContent = organizationData.data.members;
+
+
+
+  } finally {
+
+    loadingScreen.style.opacity = "0";
+    searchResults.style.display = "flex";
+
   }
 });

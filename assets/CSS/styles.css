@@ -36,7 +36,7 @@ body {
 }
 
 main {
-  top: -150px;
+  top: -160px;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -113,7 +113,7 @@ header {
 
 /* Shared styling for both application panels. */
 .lookup {
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   position: relative;
   width: 700px;
   padding: 2rem;
@@ -279,4 +279,83 @@ a:hover {
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+
+
+
+#loading-screen {
+  display: block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    color: #E6F2FF;
+    width: 900px;
+    margin: 0 auto;
+    height: 350px;
+}
+
+.terminal {
+    padding: 25px;
+    border: 2px solid #444;
+    background-color: #111;
+    border-radius: 6px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6)
+                0 0 10px rgba(88, 166, 255, 0.15);
+}
+
+.progress-container {
+  margin: 0 auto;
+  height: 12px;
+  width: 80%;
+  background-color: #0A1424;
+  border: 2px solid #2D4A68;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  transition: width 0.4s ease;
+  background-color: #4A78A6;
+}
+
+.terminal-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 2px solid #4A78A6;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+
+.terminal-body h2,
+.terminal-body {
+  padding: 15px;
+}
+
+.terminal-footer span {
+ line-height: 2;
+}
+
+#comm-status,
+#database-status,
+#auth-status {
+  color: #7F8FA6;
+}
+
+
+#loading-message{
+  font-size: 20px;
+  padding-bottom: 15px;
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0%, 100%{
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
