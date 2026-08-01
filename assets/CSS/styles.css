@@ -142,7 +142,9 @@ header {
 
 /* Hidden until JavaScript displays search results. */
 #search-results {
-  display: none;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.5s ease;
   width: 1000px;
   margin: 2rem auto;
   padding: 2rem;
@@ -150,6 +152,8 @@ header {
   background-color: rgba(0, 0, 0, 0.55);
 
   border-radius: 12px;
+
+  position: absolute;
 }
 
 #search-results p {
@@ -284,13 +288,15 @@ a:hover {
 
 
 #loading-screen {
-  display: block;
+    display: block;
     opacity: 0;
     transition: opacity 0.5s ease;
     color: #E6F2FF;
     width: 900px;
     margin: 0 auto;
     height: 350px;
+    position: relative;
+    top: 0;
 }
 
 .terminal {

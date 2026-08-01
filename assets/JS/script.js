@@ -161,7 +161,8 @@ const dataBase = document.getElementById("database-status");
   } finally {
 
     loadingScreen.style.opacity = "0";
-    searchResults.style.display = "flex";
+    searchResults.style.opacity = "1";
+
 
   }
 });
