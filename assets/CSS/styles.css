@@ -36,7 +36,6 @@ body {
 }
 
 main {
-  top: -160px;
   text-align: center;
   position: relative;
   z-index: 1;
