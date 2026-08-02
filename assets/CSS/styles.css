@@ -145,15 +145,19 @@ header {
   display: flex;
   opacity: 0;
   transition: opacity 0.5s ease;
-  width: 1000px;
-  margin: 2rem auto;
+  margin: 6rem auto;
   padding: 2rem;
-
+  width: 800px;
   background-color: rgba(0, 0, 0, 0.55);
 
   border-radius: 12px;
 
   position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+
 }
 
 #search-results p {
